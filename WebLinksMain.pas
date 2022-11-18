@@ -4,17 +4,22 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Winapi.WebView2, Winapi.ActiveX, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.Edge;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Winapi.WebView2, Winapi.ActiveX, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.ExtCtrls, Vcl.Edge, Vcl.OleCtrls, SHDocVw, System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent;
 
 type
-  TForm1 = class(TForm)
+  TFormMain = class(TForm)
     PanelEdgeBrowser: TPanel;
     EdgeBrowser: TEdgeBrowser;
-    LabeledEditSourceTable: TLabeledEdit;
-    LabeledEditDestinationTable: TLabeledEdit;
-    LabeledEdit1: TLabeledEdit;
-    ButtonTeskTask: TButton;
-    LabeledEdit2: TLabeledEdit;
+    LabeledEditURL: TLabeledEdit;
+    LabeledEditTitleHead: TLabeledEdit;
+    LabeledEditAuthor: TLabeledEdit;
+    ButtonParseURL: TButton;
+    LabeledEditTags: TLabeledEdit;
+    LabeledEditTitleH1: TLabeledEdit;
+    NetHTTPRequest: TNetHTTPRequest;
+    NetHTTPClient: TNetHTTPClient;
+    procedure ButtonParseURLClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -22,10 +27,20 @@ type
   end;
 
 var
-  Form1: TForm1;
+  FormMain: TFormMain;
 
 implementation
 
 {$R *.dfm}
+
+procedure TFormMain.ButtonParseURLClick(Sender: TObject);
+begin
+  EdgeBrowser.Navigate(LabeledEditURL.Text);
+  Application.ProcessMessages;
+  Sleep(3000);
+  LabeledEditTitleHead.Text := EdgeBrowser.DocumentTitle;
+//  LabeledEditTitleH1.Text := EdgeBrowser.t
+//  NetHTTPRequest.Execute().
+end;
 
 end.

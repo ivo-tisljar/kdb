@@ -72,4 +72,4 @@ modules/
 *.tmp
 
 # WebView2 debug files
-Win32/Debug/RRiFBackOffice.exe.WebView2/
+Win32/Debug/WebLinks.exe.WebView2/

@@ -2,13 +2,13 @@ program WebLinks;
 
 uses
   Vcl.Forms,
-  WebLinksMain in 'WebLinksMain.pas' {Form1};
+  WebLinksMain in 'WebLinksMain.pas' {FormMain};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormMain, FormMain);
   Application.Run;
 end.
