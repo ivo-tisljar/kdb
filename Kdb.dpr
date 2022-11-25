@@ -1,8 +1,8 @@
-program WebLinks;
+program Kdb;
 
 uses
   Vcl.Forms,
-  WebLinksMain in 'WebLinksMain.pas' {FormMain};
+  KdbMain in 'KdbMain.pas' {FormMain};
 
 {$R *.res}
 

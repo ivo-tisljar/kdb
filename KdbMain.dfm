@@ -31,8 +31,6 @@ object FormMain: TFormMain
       Height = 523
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 904
-      ExplicitHeight = 459
     end
   end
   object LabeledEditURL: TLabeledEdit
