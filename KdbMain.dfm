@@ -24,7 +24,7 @@ object FormMain: TFormMain
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelKind = bkSoft
     ParentBackground = False
-    TabOrder = 10
+    TabOrder = 12
     object EdgeBrowser: TEdgeBrowser
       Left = 1
       Top = 1
@@ -104,13 +104,13 @@ object FormMain: TFormMain
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 6
+    TabOrder = 8
     OnClick = ButtonParseURLClick
   end
   object LabeledEditTags: TLabeledEdit
     Left = 24
     Top = 200
-    Width = 857
+    Width = 633
     Height = 23
     Color = 3158064
     EditLabel.Width = 23
@@ -133,7 +133,7 @@ object FormMain: TFormMain
     Color = 3158064
     Lines.Strings = (
       '')
-    TabOrder = 9
+    TabOrder = 11
   end
   object ButtonAddToKdb: TButton
     Left = 912
@@ -147,10 +147,10 @@ object FormMain: TFormMain
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 7
+    TabOrder = 9
     OnClick = ButtonAddToKdbClick
   end
-  object Button1: TButton
+  object ButtonUpdateKdb: TButton
     Left = 912
     Top = 143
     Width = 145
@@ -162,8 +162,8 @@ object FormMain: TFormMain
     Font.Name = 'Segoe UI'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 8
-    OnClick = ButtonAddToKdbClick
+    TabOrder = 10
+    OnClick = ButtonUpdateKdbClick
   end
   object LabeledEditHost: TLabeledEdit
     Left = 688
@@ -183,7 +183,7 @@ object FormMain: TFormMain
     TabOrder = 2
     Text = ''
   end
-  object LabeledDomain: TLabeledEdit
+  object LabeledEditDomain: TLabeledEdit
     Left = 688
     Top = 143
     Width = 193
@@ -199,6 +199,42 @@ object FormMain: TFormMain
     Font.Style = []
     ParentFont = False
     TabOrder = 4
+    Text = ''
+  end
+  object LabeledEditEstimate: TLabeledEdit
+    Left = 688
+    Top = 200
+    Width = 81
+    Height = 23
+    Color = 3158064
+    EditLabel.Width = 45
+    EditLabel.Height = 15
+    EditLabel.Caption = 'Estimate'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clSilver
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 6
+    Text = ''
+  end
+  object LabeledEditRating: TLabeledEdit
+    Left = 800
+    Top = 200
+    Width = 81
+    Height = 23
+    Color = 3158064
+    EditLabel.Width = 34
+    EditLabel.Height = 15
+    EditLabel.Caption = 'Rating'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clSilver
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 7
     Text = ''
   end
 end

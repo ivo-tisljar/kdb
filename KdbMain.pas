@@ -6,29 +6,35 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   System.Net.URLClient, System.Net.HttpClient, System.Net.HttpClientComponent,
   Winapi.WebView2, Winapi.ActiveX,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.Edge, Vcl.OleCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls, Vcl.Edge, Vcl.OleCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
+  FireDAC.Phys.MSSQL, FireDAC.Phys.MSSQLDef, FireDAC.VCLUI.Wait, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 
 type
   TFormMain = class(TForm)
-    PanelEdgeBrowser: TPanel;
-    EdgeBrowser: TEdgeBrowser;
     LabeledEditURL: TLabeledEdit;
     LabeledEditTitle: TLabeledEdit;
-    LabeledEditAuthor: TLabeledEdit;
-    ButtonParseURL: TButton;
-    LabeledEditTags: TLabeledEdit;
-    MemoHTML: TMemo;
-    ButtonAddToKdb: TButton;
-    Button1: TButton;
     LabeledEditHost: TLabeledEdit;
-    LabeledDomain: TLabeledEdit;
+    LabeledEditAuthor: TLabeledEdit;
+    LabeledEditDomain: TLabeledEdit;
+    LabeledEditTags: TLabeledEdit;
+    LabeledEditEstimate: TLabeledEdit;
+    LabeledEditRating: TLabeledEdit;
+    ButtonParseURL: TButton;
+    ButtonAddToKdb: TButton;
+    ButtonUpdateKdb: TButton;
+    MemoHTML: TMemo;
+    PanelEdgeBrowser: TPanel;
+    EdgeBrowser: TEdgeBrowser;
     procedure ButtonParseURLClick(Sender: TObject);
     procedure EdgeBrowserNavigationCompleted(Sender: TCustomEdgeBrowser; IsSuccess: Boolean; WebErrorStatus: TOleEnum);
     procedure ExtractBasicDataFromHtmlPage;
     procedure EdgeBrowserExecuteScript(Sender: TCustomEdgeBrowser; AResult: HRESULT; const AResultObjectAsJson: string);
     procedure FormCreate(Sender: TObject);
     procedure ButtonAddToKdbClick(Sender: TObject);
+    procedure ButtonUpdateKdbClick(Sender: TObject);
   private
     function GetAuthor(const HTMLcode: string): string;
 
@@ -48,11 +54,18 @@ implementation
 
 uses
   System.NetEncoding, System.RegularExpressions,
-  IdHTTP;
+  IdHTTP,
+  _KdbDataModule;
 
+
+procedure TFormMain.ButtonUpdateKdbClick(Sender: TObject);
+begin
+//
+end;
 
 procedure TFormMain.ButtonAddToKdbClick(Sender: TObject);
 begin
+  KdbDataModule.InsertWebLink(self.LabeledEditURL, )
 //
 end;
 
@@ -83,7 +96,7 @@ procedure TFormMain.ExtractBasicDataFromHtmlPage;
 var
   HTTP : TIdHTTP;
 begin
-  LabeledEditTitleHead.Text := EdgeBrowser.DocumentTitle;
+  LabeledEditTitle.Text := EdgeBrowser.DocumentTitle;
 
   HTTP := TIdHTTP.Create;
 //  MemoHTML.Text := HTTP.Get(LabeledEditURL.Text);
