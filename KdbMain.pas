@@ -54,6 +54,7 @@ implementation
 
 uses
   System.NetEncoding, System.RegularExpressions,
+//  System.Threading,
   IdHTTP,
   _KdbDataModule;
 
@@ -65,14 +66,20 @@ end;
 
 procedure TFormMain.ButtonAddToKdbClick(Sender: TObject);
 begin
-  KdbDataModule.InsertWebLink(self.LabeledEditURL, )
-//
+  KdbDataModule.InsertWebPage(
+      LabeledEditURL.Text, LabeledEditTitle.Text, LabeledEditHost.Text, LabeledEditAuthor.Text,
+      LabeledEditDomain.Text, LabeledEditTags.Text, LabeledEditEstimate.Text, LabeledEditRating.Text);
 end;
 
 
 procedure TFormMain.ButtonParseURLClick(Sender: TObject);
 begin
-  EdgeBrowser.Navigate(LabeledEditURL.Text);
+//  TTask.Run(
+//    procedure
+//    begin
+      EdgeBrowser.Navigate(LabeledEditURL.Text);
+//    end);
+
 //  EdgeBrowser.ExecuteScript('encodeURI(document.documentElement.outerHTML)');
 //  ExtractBasicDataFromHtmlPage;
 end;

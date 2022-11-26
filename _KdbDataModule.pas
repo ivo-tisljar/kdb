@@ -13,15 +13,15 @@ type
     FDQuery: TFDQuery;
   private
     { Private declarations }
-    function  GetInsertWebLinkSQL(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string): string;
+    function  GetInsertWebPageSQL(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string): string;
     function  GetUpdateWebLinkSQL(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string): string;
     function  IsDomainNullOrExisting(const Domain: string): boolean;
-    function  IsWebLinkExisting(const URL:string): boolean;
+    function  IsWebPageExisting(const URL:string): boolean;
     function  StrToSQLInteger(const FieldValue: string): string;
     function  StrToSQLString(const FieldValue: string): string;
   public
     { Public declarations }
-    procedure InsertWebLink(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string);
+    procedure InsertWebPage(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string);
     procedure UpdateWebLink(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string);
   end;
 
@@ -43,11 +43,11 @@ const CrLf = #13#10;
 
 //
 
-function TKdbDataModule.GetInsertWebLinkSQL(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string): string;
+function TKdbDataModule.GetInsertWebPageSQL(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string): string;
 begin
   Result :=
     'INSERT INTO ' + CrLf +
-        'WebLink (URL, Title, Host, Author, Tags, DomainID, Estimate, Rating) ' + CrLf +
+        'WebPage (URL, Title, Host, Author, DomainID, Tags, Estimate, Rating) ' + CrLf +
     'VALUES (' +
         StrToSQLString(URL) + ', ' +
         StrToSQLString(Title) + ', ' +
@@ -71,18 +71,18 @@ end;
 
 //
 
-procedure TKdbDataModule.InsertWebLink(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string);
+procedure TKdbDataModule.InsertWebPage(const URL, Title, Host, Author, Domain, Tags, Estimate, Rating: string);
 begin
-  if IsWebLinkExisting(URL) then
-    raise Exception.Create('Web link is already present in the database!');
-  if IsDomainNullOrExisting(Domain) then
+  if IsWebPageExisting(URL) then
+    raise Exception.Create('Web page is already present in the database!');
+  if Not IsDomainNullOrExisting(Domain) then
     raise Exception.Create('Domain is NOT present in the database!');
   with FDQuery do
     begin
       SQL.Clear;
-      SQL.Add(GetInsertWebLinkSQL(URL, Title, Host, Author, Domain, Tags, Estimate, Rating));
+      SQL.Add(GetInsertWebPageSQL(URL, Title, Host, Author, Domain, Tags, Estimate, Rating));
       if (ExecSQL(false) <> 1) then
-        raise Exception.Create('Unssuccesful insert of the new web link!');
+        raise Exception.Create('Unssuccesful insert of the new web page!');
     end;
 end;
 
@@ -97,7 +97,7 @@ begin
     with FDQuery do
       begin
         SQL.Clear;
-        SQL.Add('SELECT Count(*) AS ''RecordCount'' FROM Domain WHERE URL = ' + Domain);
+        SQL.Add('SELECT Count(*) AS ''RecordCount'' FROM Domain WHERE Name = ''' + Domain + ''';');
         Prepare;
         Open;
         Result := (FieldByName('RecordCount').AsInteger > 0);
@@ -106,12 +106,11 @@ begin
 end;
 
 
-function TKdbDataModule.IsWebLinkExisting(const URL: string): boolean;
+function TKdbDataModule.IsWebPageExisting(const URL: string): boolean;
 begin
   with FDQuery do
     begin
-      SQL.Clear;
-      SQL.Add('SELECT Count(*) AS ''RecordCount'' FROM WebLink WHERE URL = ' + URL);
+      SQL.Text := 'SELECT Count(*) AS ''RecordCount'' FROM WebPage WHERE URL = ''' + URL + ''';';
       Prepare;
       Open;
       Result := (FieldByName('RecordCount').AsInteger > 0);
