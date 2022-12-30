@@ -2,8 +2,8 @@ object FormMain: TFormMain
   Left = 0
   Top = 0
   Caption = 'Web Links'
-  ClientHeight = 834
-  ClientWidth = 1082
+  ClientHeight = 769
+  ClientWidth = 1066
   Color = clBlack
   Font.Charset = DEFAULT_CHARSET
   Font.Color = 11579568
@@ -13,29 +13,31 @@ object FormMain: TFormMain
   OnCreate = FormCreate
   PixelsPerInch = 96
   DesignSize = (
-    1082
-    834)
+    1066
+    769)
   TextHeight = 15
   object PanelEdgeBrowser: TPanel
     Left = 24
     Top = 256
-    Width = 1033
-    Height = 546
+    Width = 1017
+    Height = 481
     Anchors = [akLeft, akTop, akRight, akBottom]
     BevelKind = bkSoft
     ParentBackground = False
     TabOrder = 12
+    ExplicitWidth = 1015
+    ExplicitHeight = 473
     object EdgeBrowser: TEdgeBrowser
       Left = 1
       Top = 1
-      Width = 1027
-      Height = 540
+      Width = 1011
+      Height = 475
       Align = alClient
       TabOrder = 0
       OnExecuteScript = EdgeBrowserExecuteScript
       OnNavigationCompleted = EdgeBrowserNavigationCompleted
-      ExplicitWidth = 1011
-      ExplicitHeight = 523
+      ExplicitWidth = 1009
+      ExplicitHeight = 467
     end
   end
   object LabeledEditURL: TLabeledEdit
